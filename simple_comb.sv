@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module alu4 (
   input  logic [3:0] a,
   input  logic [3:0] b,
@@ -39,10 +41,12 @@ module alu4 (
       OP_XOR: result = a ^ b;
       OP_NOT: result = ~a;
       OP_SHL: begin
-        result = a << b;
+        result = {a[2:0], 1'b0};
+        cout   = a[3];          
       end
       OP_SHR: begin
-        result = a >> b;
+        result = {1'b0, a[3:1]};
+        cout   = a[0]; 
       end
     endcase
   end
